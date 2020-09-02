@@ -1,3 +1,10 @@
+// Get data
+db.collection("guides")
+  .get()
+  .then((snapshot) => {
+    setUpGuides(snapshot.docs);
+  });
+
 // Listen for auth status changes
 auth.onAuthStateChanged((user) => {
   // console.log(user);
@@ -10,7 +17,6 @@ auth.onAuthStateChanged((user) => {
 
 // Sign up
 const signupForm = document.querySelector("#signup-form");
-
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
