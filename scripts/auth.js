@@ -15,6 +15,26 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
+// Create new guide
+const createForm = document.querySelector("#create-form");
+createForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  db.collection("guides")
+    .add({
+      title: createForm["title"].value,
+      content: createForm["content"].value,
+    })
+    .then(() => {
+      // close modal and reset form
+      const create_modal = document.querySelector("#modal-create");
+      M.Modal.getInstance(create_modal).close();
+      createForm.reset();
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+});
+
 // Sign up
 const signupForm = document.querySelector("#signup-form");
 signupForm.addEventListener("submit", (e) => {
