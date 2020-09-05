@@ -1,17 +1,15 @@
-// Get data
-db.collection("guides")
-  .get()
-  .then((snapshot) => {
-    setUpGuides(snapshot.docs);
-  });
-
 // Listen for auth status changes
 auth.onAuthStateChanged((user) => {
   // console.log(user);
   if (user) {
-    console.log("User logged in: ", user);
+    // Get data
+    db.collection("guides")
+      .get()
+      .then((snapshot) => {
+        setUpGuides(snapshot.docs);
+      });
   } else {
-    console.log("User logged out");
+    setUpGuides([]);
   }
 });
 
