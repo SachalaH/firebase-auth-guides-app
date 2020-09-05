@@ -1,5 +1,28 @@
 // Guide list update
 const guideList = document.querySelector(".guides");
+
+const loggedOutLinks = document.querySelectorAll(".logged-out");
+const loggedInLinks = document.querySelectorAll(".logged-in");
+
+const setupUI = (user) => {
+  if (user) {
+    // Toggle ui elements
+    loggedInLinks.forEach((link) => {
+      link.style.display = "block";
+    });
+    loggedOutLinks.forEach((link) => {
+      link.style.display = "none";
+    });
+  } else {
+    // Toggle ui elements
+    loggedInLinks.forEach((link) => {
+      link.style.display = "none";
+    });
+    loggedOutLinks.forEach((link) => {
+      link.style.display = "block";
+    });
+  }
+};
 // settign up guides
 const setUpGuides = (docs) => {
   if (docs.length) {
