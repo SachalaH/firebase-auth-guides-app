@@ -45,11 +45,18 @@ signupForm.addEventListener("submit", (e) => {
   const password = signupForm["signup-password"].value;
 
   // sign up the user
-  auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-    const signup_modal = document.querySelector("#modal-signup");
-    M.Modal.getInstance(signup_modal).close();
-    signupForm.reset();
-  });
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((cred) => {
+      return db.collection("users").doc(cred.user.uid).set({
+        bio: signupForm["signup-bio"].value,
+      });
+    })
+    .then(() => {
+      const signup_modal = document.querySelector("#modal-signup");
+      M.Modal.getInstance(signup_modal).close();
+      signupForm.reset();
+    });
 });
 
 // Log out method

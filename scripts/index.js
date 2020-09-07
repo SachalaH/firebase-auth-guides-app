@@ -9,8 +9,15 @@ const accountDetails = document.querySelector(".account-details");
 const setupUI = (user) => {
   if (user) {
     // Account info
-    const html = `<div>Logged in as ${user.email}</div>`;
-    accountDetails.innerHTML = html;
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        const html = `<div>Logged in as ${user.email}</div>
+                      <div>Bio: ${doc.data().bio}</div>`;
+        accountDetails.innerHTML = html;
+      });
+
     // Toggle ui elements
     loggedInLinks.forEach((link) => {
       link.style.display = "block";
