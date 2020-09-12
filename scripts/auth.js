@@ -5,6 +5,7 @@ adminForm.addEventListener("submit", (e) => {
   const adminEmail = document.querySelector("#admin-email").value;
   const addAdminRole = functions.httpsCallable("addAdminRole");
   addAdminRole({ email: adminEmail }).then((result) => {
+    document.querySelector("#admin-email").value = "";
     console.log(result);
   });
 });
